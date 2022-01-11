@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: "jdbc:mysql://127.0.0.1:3306/test?characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true"
+    password: 123456
+    username: root
+    driverClassName: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+
+logging:
+  level:
+    lpy:
+      mybatis:
+        mapper: debug
