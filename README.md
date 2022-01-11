@@ -1,4 +1,4 @@
-要把本项目集成进自己项目时，要保证自己项目是支持spring IOC的。生成dao层时，会生成@Repository与@Autowired 
+要把本项目集成进自己项目时，要保证自己项目是支持spring IOC的。生成dao层时，会生成@Repository与@Autowired ，JDK版本1.8
 
 写这个项目只是为了玩，基于mybatis做SQL查询时，对于复杂查询代码化。
 
@@ -7,6 +7,19 @@
 先是生成对应的表结构，可以参考test项目中的test目录lpy.mybatis.generator.GeneratorTest
 
 生成对应的实体类与mapper与dao层。
+
+1. 如果是已经存在实体类，只需要在实体类上加入 @MybatisGeneratorHelper和@TableName("表名") 注解，对于id字段加入@Id，默认情况下，属性名就是表的字段名，如果是驼峰命名则在类上加入@PropertiesFormat(format = Entity.PropertiesFormat.HUMP)，如果存在多种命名方式，则需要单独设置属性名上加入@TableField("表的字段名")
+2. 加入好之后，在idea的菜单栏选择Build->Build Project, 如果有报Jdk的编译问题，则有需要手动删除/target/ 目录（生成class文件的目录）.
+3. 如果有报找不到java.sum的jar包，则需要在mybatis-generator项目的pom文件中加入
+```
+<dependency>
+    <groupId>jcom.sun</groupId>
+    <artifactId>tools</artifactId>
+    <version>1.8</version> <!-- 你的jdk版本 -->
+    <scope>system</scope>
+    <systemPath>${env.JAVA_HOME}/lib/tools.jar</systemPath>
+</dependency>
+```
 
 简单SQL查询可以直接用dao层的方法，应该都比较好理解的。
 
